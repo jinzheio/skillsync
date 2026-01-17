@@ -14,9 +14,26 @@ import { init } from "./commands/init.js";
 import { showConfig } from "./commands/config.js";
 import { bold, dim, red } from "./lib/colors.js";
 
-const VERSION = "1.0.0";
+import { readFile } from "node:fs/promises";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-function printHelp(): void {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+async function getVersion(): Promise<string> {
+  try {
+    const packagePath = join(__dirname, "..", "package.json");
+    const content = await readFile(packagePath, "utf-8");
+    const pkg = JSON.parse(content);
+    return pkg.version;
+  } catch {
+    return "unknown";
+  }
+}
+
+async function printHelp(): Promise<void> {
+  const version = await getVersion();
   console.log(`
 ${bold("skillsync")} - Sync Agent Skills to various tools
 
@@ -53,7 +70,7 @@ ${bold("Examples:")}
   skills sync
   skills status
 
-${bold("Version:")} ${VERSION}
+${bold("Version:")} ${version}
 `);
 }
 
@@ -91,18 +108,18 @@ async function main(): Promise<void> {
       case "help":
       case "--help":
       case "-h":
-        printHelp();
+        await printHelp();
         break;
       case "version":
       case "--version":
       case "-v":
-        console.log(VERSION);
+        console.log(await getVersion());
         break;
       default:
         if (command) {
           console.log(red(`Unknown command: ${command}\n`));
         }
-        printHelp();
+        await printHelp();
         process.exit(command ? 1 : 0);
     }
   } catch (error) {
