@@ -1,10 +1,14 @@
 /**
  * Type definitions
  */
+
+export type ConflictResolution = "yes" | "no" | "yes-all" | "no-all";
+
 export interface Source {
   url?: string;
   subdir?: string;
   enabled: boolean;
+  localPath?: string; // Track original local source path
 }
 
 export interface Target {

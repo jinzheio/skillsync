@@ -10,6 +10,28 @@ export interface ParsedGitUrl {
 }
 
 /**
+ * Check if input looks like a local file path
+ */
+export function isLocalPath(input: string): boolean {
+  // Absolute paths
+  if (input.startsWith('/') || input.startsWith('~/')) {
+    return true;
+  }
+  
+  // Relative paths
+  if (input.startsWith('./') || input.startsWith('../')) {
+    return true;
+  }
+  
+  // Windows absolute paths
+  if (/^[A-Za-z]:[\\/]/.test(input)) {
+    return true;
+  }
+  
+  return false;
+}
+
+/**
  * Detect if input is a remote URL or local path
  */
 export function detectSourceType(input: string): 'remote' | 'local' {
@@ -18,17 +40,17 @@ export function detectSourceType(input: string): 'remote' | 'local' {
     return 'remote';
   }
   
-  // Local path (absolute or relative)
-  if (input.startsWith('/') || input.startsWith('~/') || input.startsWith('./') || input.startsWith('../')) {
+  // Local path detection
+  if (isLocalPath(input)) {
     return 'local';
   }
   
   // owner/repo format, treat as GitHub repository
-  if (input.includes('/') && !input.startsWith('local/')) {
+  if (input.includes('/')) {
     return 'remote';
   }
   
-  // Default to local
+  // Default to local for safety
   return 'local';
 }
 

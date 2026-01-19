@@ -7,7 +7,7 @@ Sync **Agent Skills** to **Cursor**, **Claude**, **Codex**, and more.
 ## Quick Start
 
 ```bash
-# 1. Fetch skills from Git
+# 1. Fetch skills from Git and local sources
 skills fetch
 
 # 2. Sync to all enabled targets
@@ -15,6 +15,17 @@ skills sync
 
 # 3. View status
 skills status
+```
+
+### Adding Local Skills
+
+```bash
+# Add local skills directory (absolute or relative path)
+skills source add ~/Projects/my-skills
+skills source add ./local-skills
+
+# Fetch to sync
+skills fetch
 ```
 
 ## Commands
@@ -39,25 +50,32 @@ Configuration is stored in `~/.skillsync/config.json`. You can manage it via CLI
 
 ### Add New Skills Source
 
+**Remote Sources (GitHub):**
+
 ```bash
 skills source add owner/repo
 # or
 skills source add https://github.com/owner/repo
 ```
 
-Manually in `config.json`:
+**Local Sources:**
 
-```typescript
-sources: {
-  // From GitHub
-  "owner/repo": {
-    url: "https://github.com/owner/repo",
-    subdir: "skills",  // Optional: if skills are in subdirectory
-  },
-  // Local skills (manually maintained)
-  "local/my-skills": {},
-}
+```bash
+# Add local skills directory (any path format)
+skills source add ~/Projects/apple-mp/skills
+skills source add ./my-local-skills
+skills source add /absolute/path/to/skills
 ```
+
+Any subdirectories in the path will be treated as individual skills and copied to `~/.skillsync/store/local/`.
+
+**Conflict Resolution**: When fetching local sources, if a skill with the same name already exists in the local store with different content, you'll be prompted to choose:
+- `yes` - Overwrite this specific skill
+- `no` - Keep existing skill unchanged
+- `yes for all` - Overwrite all remaining conflicts (new skills are still copied)
+- `no for all` - Keep all existing skills unchanged when conflicts occur (new skills are still copied)
+
+> **Note**: Both "for all" options only affect conflicting skills. New skills without conflicts are always copied.
 
 > ⚠️ **Important**: If skills are in a subdirectory of the repository (e.g., `vercel-labs/agent-skills` has skills in `skills/` directory), you **must** configure `subdir: "skills"`, otherwise the synced content will be incorrect and AI tools won't recognize the skills.
 
@@ -75,21 +93,24 @@ targets: {
 ## Directory Structure
 
 ```
-~/.skills/
+~/.skillsync/store/
 ├── anthropics/skills/          # Remote source
 │   ├── doc-analyzer/
 │   └── ...
 ├── vercel-labs/agent-skills/   # Remote source
 │   └── ...
-└── local/my-skills/            # Local skills
-    └── my-custom-skill/
+└── local/                      # All local skills (flat structure)
+    ├── apple-writer/
+    ├── my-custom-skill/
+    └── another-skill/
 ```
 
 ## Important Notes
 
 - **Remote sources**: Each `fetch` will **completely overwrite** local content
-- **Local sources**: `fetch` will skip them, must be maintained manually
-- **Add local skill**: Create folder in `~/.skills/local/your-name/`
+- **Local sources**: Copied from source path with conflict detection during `fetch`
+- **Updating local skills**: Re-run `skills fetch` to sync changes from source path
+- **Local storage**: All local skills are stored in flat structure under `~/.skillsync/store/local/`
 
 ## Default Configuration
 

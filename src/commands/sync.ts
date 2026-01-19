@@ -41,6 +41,21 @@ export async function sync(): Promise<void> {
     }
   }
 
+  // Add all skills from local directory (flat structure)
+  const localDir = join(STORE_DIR, "local");
+  if (await exists(localDir)) {
+    try {
+      const items = await readdir(localDir, { withFileTypes: true });
+      for (const item of items) {
+        if (item.isDirectory()) {
+          allSkills.push(join(localDir, item.name));
+        }
+      }
+    } catch {
+      // Ignore read errors
+    }
+  }
+
   if (allSkills.length === 0) {
     console.log(dim("  No skills found. Run 'skills fetch' first.\n"));
     return;

@@ -7,7 +7,7 @@
 ## 快速开始
 
 ```bash
-# 1. 从 Git 获取 skills
+# 1. 从 Git 和本地源获取 skills
 skills fetch
 
 # 2. 同步到所有启用的目标工具
@@ -15,6 +15,17 @@ skills sync
 
 # 3. 查看状态
 skills status
+```
+
+### 添加本地 Skills
+
+```bash
+# 添加本地 skills 目录（绝对或相对路径）
+skills source add ~/Projects/my-skills
+skills source add ./local-skills
+
+# 运行 fetch 同步
+skills fetch
 ```
 
 ## 命令列表
@@ -39,25 +50,32 @@ skills status
 
 ### 添加新的 Skills 源
 
+**远程源（GitHub）：**
+
 ```bash
 skills source add owner/repo
 # 或
 skills source add https://github.com/owner/repo
 ```
 
-手动编辑 `config.json`：
+**本地源：**
 
-```typescript
-sources: {
-  // 从 GitHub 获取
-  "owner/repo": {
-    url: "https://github.com/owner/repo",
-    subdir: "skills",  // 可选：如果 skills 在仓库的子目录
-  },
-  // 本地 skills（手动维护）
-  "local/my-skills": {},
-}
+```bash
+# 添加本地 skills 目录（支持任意路径格式）
+skills source add ~/Projects/apple-mp/skills
+skills source add ./my-local-skills
+skills source add /absolute/path/to/skills
 ```
+
+路径下的所有子目录都会被视为独立的 skill，并复制到 `~/.skillsync/store/local/`。
+
+**冲突解决**：当获取本地源时，如果同名 skill 已存在且内容不同，系统会提示您选择：
+- `yes` - 覆盖这个特定的 skill
+- `no` - 保留现有 skill 不变
+- `yes for all` - 覆盖所有剩余冲突（新 skills 仍会被复制）
+- `no for all` - 保留所有现有 skills 不变（新 skills 仍会被复制）
+
+> **注意**：两个 "for all" 选项仅影响冲突的 skills。没有冲突的新 skills 始终会被复制。
 
 > ⚠️ **重要**: 如果 skills 在仓库的子目录中（如 [`vercel-labs/agent-skills`](https://github.com/vercel-labs/agent-skills) 的 skills 在 `skills/` 目录下），需要配置 `subdir: "skills"`，否则AI 工具无法识别 skills。
 
@@ -75,21 +93,24 @@ targets: {
 ## 目录结构
 
 ```
-~/.skills/
+~/.skillsync/store/
 ├── anthropics/skills/          # 远程源
 │   ├── doc-analyzer/
 │   └── ...
 ├── vercel-labs/agent-skills/   # 远程源
 │   └── ...
-└── local/my-skills/            # 本地 skills
-    └── my-custom-skill/
+└── local/                      # 所有本地 skills（扁平结构）
+    ├── apple-writer/
+    ├── my-custom-skill/
+    └── another-skill/
 ```
 
 ## 重要说明
 
 - **远程源**: 每次 `fetch` 会**完全覆盖**本地内容
-- **本地源**: `fetch` 会跳过，需要手动维护
-- **添加本地 skill**: 在 `~/.skills/local/your-name/` 创建文件夹
+- **本地源**: 在 `fetch` 时从源路径复制，带冲突检测
+- **更新本地 skills**: 重新运行 `skills fetch` 从源路径同步变更
+- **本地存储**: 所有本地 skills 以扁平结构存储在 `~/.skillsync/store/local/`
 
 ## 默认配置
 

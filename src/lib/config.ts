@@ -57,18 +57,25 @@ export async function writeConfig(config: Config): Promise<void> {
 }
 
 // Add source
-export async function addSource(name: string, url?: string, subdir?: string): Promise<void> {
+export async function addSource(
+  name: string,
+  url?: string,
+  subdir?: string,
+  localPath?: string
+): Promise<void> {
   const config = await readConfig();
 
   if (config.sources[name]) {
     throw new Error(`Source "${name}" already exists`);
   }
 
-  config.sources[name] = {
-    url,
-    subdir,
-    enabled: true,
-  };
+  // Build source object with only defined properties
+  const source: any = { enabled: true };
+  if (url !== undefined) source.url = url;
+  if (subdir !== undefined) source.subdir = subdir;
+  if (localPath !== undefined) source.localPath = localPath;
+
+  config.sources[name] = source;
 
   await writeConfig(config);
 }

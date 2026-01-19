@@ -74,8 +74,22 @@ async function sourceAdd(args: string[]): Promise<void> {
       if (subdir) console.log(dim(`  Subdir: ${subdir}`));
       console.log(dim("\nRun 'skills fetch' to download skills.\n"));
     } else {
-      // Local source: use full path as name
+      // Local source: validate path exists and store with localPath
       const fullPath = getLocalSourceName(input);
+      
+      // Check if path exists
+      const { stat } = await import("node:fs/promises");
+      try {
+        const stats = await stat(fullPath);
+        if (!stats.isDirectory()) {
+          throw new Error(`Path is not a directory: ${fullPath}`);
+        }
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+          throw new Error(`Path does not exist: ${fullPath}`);
+        }
+        throw error;
+      }
 
       const config = await readConfig();
       if (config.sources[fullPath]) {
@@ -84,8 +98,10 @@ async function sourceAdd(args: string[]): Promise<void> {
         return;
       }
 
-      await addSource(fullPath, undefined, undefined);
-      console.log(green(`\n✓ Added local source: ${fullPath}\n`));
+      // Add with localPath property
+      await addSource(fullPath, undefined, undefined, fullPath);
+      console.log(green(`\n✓ Added local source: ${fullPath}`));
+      console.log(dim(`  Run 'skills fetch' to sync skills.\n`));
     }
   } catch (error) {
     console.log(red(`\n✗ ${error instanceof Error ? error.message : error}\n`));
@@ -146,6 +162,9 @@ async function sourceList(): Promise<void> {
     }
     if (source.subdir) {
       console.log(`    ${dim(`Subdir: ${source.subdir}`)}`);
+    }
+    if (source.localPath) {
+      console.log(`    ${dim(`Local: ${source.localPath}`)}`);
     }
   }
 
