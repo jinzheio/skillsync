@@ -4,6 +4,20 @@
 
 Sync **Agent Skills** to **Cursor**, **Claude**, **Codex**, and more.
 
+## Features
+
+- 🔄 Sync skills to multiple AI coding tools (Cursor, Claude, Codex, Copilot, etc.)
+- 🌐 Support for remote Git repositories and local skill directories
+- 🔀 Intelligent conflict resolution for local skills
+- ⚙️ Flexible configuration via CLI or config file
+- 🚀 Easy-to-use command-line interface
+
+## Installation
+
+```bash
+npm install -g skillsync
+```
+
 ## Quick Start
 
 ```bash
@@ -32,17 +46,15 @@ skills fetch
 
 | Command | Description |
 |---------|-------------|
-| `skills fetch` | Fetch/update all skills from Git |
-| `skills fetch -- anthropics/skills` | Fetch specific source |
+| `skills fetch` | Fetch/update all skills from sources |
+| `skills fetch <source>` | Fetch specific source |
 | `skills sync` | Sync to all enabled targets |
 | `skills status` | View sync status |
 | `skills list` | List all skills |
 | `skills config` | Show configuration |
-
-**Backward compatible:**
-- `npm run skills:fetch` still works
-- `npm run skills:sync` still works
-- `npm run skills:status` still works
+| `skills source add <path>` | Add a new skills source |
+| `skills source remove <path>` | Remove a skills source |
+| `skills source list` | List all sources |
 
 ## Configuration
 
@@ -105,10 +117,24 @@ targets: {
     └── another-skill/
 ```
 
+## How It Works
+
+1. **Fetch**: Skills are fetched from configured sources (Git repos and local directories)
+   - Remote sources: Cloned/updated from Git repositories
+   - Local sources: Copied from your local directories with conflict detection
+
+2. **Store**: All skills are stored in `~/.skillsync/store/`
+   - Remote sources maintain their repository structure
+   - Local sources are stored in a flat structure under `local/`
+
+3. **Sync**: Skills are copied to enabled target directories
+   - Each target has its own directory structure
+   - Existing skills are overwritten, new skills are added
+
 ## Important Notes
 
 - **Remote sources**: Each `fetch` will **completely overwrite** local content
-- **Local sources**: Copied from source path with conflict detection during `fetch`
+- **Local sources**: Copied from source path with intelligent conflict detection
 - **Updating local skills**: Re-run `skills fetch` to sync changes from source path
 - **Local storage**: All local skills are stored in flat structure under `~/.skillsync/store/local/`
 
@@ -127,8 +153,16 @@ targets: {
 - Gemini (`~/.gemini/skills/`)
 - Windsurf (`~/.windsurf/skills/`)
 
-## Dependencies
+## Requirements
 
 - Node.js 18+
 - Git
-- tsx (auto-installed via npx)
+
+## License
+
+MIT © [Jinzhe](https://github.com/jinzheio)
+
+## Repository
+
+- [GitHub](https://github.com/jinzheio/skillsync)
+- [Issues](https://github.com/jinzheio/skillsync/issues)
