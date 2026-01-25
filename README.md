@@ -22,39 +22,39 @@ npm install -g skillsync
 
 ```bash
 # 1. Fetch skills from Git and local sources
-skills fetch
+skillsync fetch
 
 # 2. Sync to all enabled targets
-skills sync
+skillsync sync
 
 # 3. View status
-skills status
+skillsync status
 ```
 
 ### Adding Local Skills
 
 ```bash
 # Add local skills directory (absolute or relative path)
-skills source add ~/Projects/my-skills
-skills source add ./local-skills
+skillsync source add ~/Projects/my-skills
+skillsync source add ./local-skills
 
 # Fetch to sync
-skills fetch
+skillsync fetch
 ```
 
 ## Commands
 
 | Command | Description |
 |---------|-------------|
-| `skills fetch` | Fetch/update all skills from sources |
-| `skills fetch <source>` | Fetch specific source |
-| `skills sync` | Sync to all enabled targets |
-| `skills status` | View sync status |
-| `skills list` | List all skills |
-| `skills config` | Show configuration |
-| `skills source add <path>` | Add a new skills source |
-| `skills source remove <path>` | Remove a skills source |
-| `skills source list` | List all sources |
+| `skillsync fetch` | Fetch/update all skills from sources |
+| `skillsync fetch <source>` | Fetch specific source |
+| `skillsync sync` | Sync to all enabled targets |
+| `skillsync status` | View sync status |
+| `skillsync list` | List all skills |
+| `skillsync config` | Show configuration |
+| `skillsync source add <path>` | Add a new skills source |
+| `skillsync source remove <path>` | Remove a skills source |
+| `skillsync source list` | List all sources |
 
 ## Configuration
 
@@ -65,18 +65,18 @@ Configuration is stored in `~/.skillsync/config.json`. You can manage it via CLI
 **Remote Sources (GitHub):**
 
 ```bash
-skills source add owner/repo
+skillsync source add owner/repo
 # or
-skills source add https://github.com/owner/repo
+skillsync source add https://github.com/owner/repo
 ```
 
 **Local Sources:**
 
 ```bash
 # Add local skills directory (any path format)
-skills source add ~/Projects/apple-mp/skills
-skills source add ./my-local-skills
-skills source add /absolute/path/to/skills
+skillsync source add ~/Projects/apple-mp/skills
+skillsync source add ./my-local-skills
+skillsync source add /absolute/path/to/skills
 ```
 
 Any subdirectories in the path will be treated as individual skills and copied to `~/.skillsync/store/local/`.
@@ -135,7 +135,7 @@ targets: {
 
 - **Remote sources**: Each `fetch` will **completely overwrite** local content
 - **Local sources**: Copied from source path with intelligent conflict detection
-- **Updating local skills**: Re-run `skills fetch` to sync changes from source path
+- **Updating local skills**: Re-run `skillsync fetch` to sync changes from source path
 - **Local storage**: All local skills are stored in flat structure under `~/.skillsync/store/local/`
 
 ## Default Configuration

@@ -4,7 +4,7 @@
   "description": "Sync Agent Skills to Cursor, Claude, Codex and more",
   "type": "module",
   "bin": {
-    "skills": "./dist/cli.js"
+    "skillsync": "./dist/cli.js"
   },
   "files": [
     "dist",

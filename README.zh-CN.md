@@ -8,41 +8,36 @@
 
 ```bash
 # 1. 从 Git 和本地源获取 skills
-skills fetch
+skillsync fetch
 
 # 2. 同步到所有启用的目标工具
-skills sync
+skillsync sync
 
 # 3. 查看状态
-skills status
+skillsync status
 ```
 
 ### 添加本地 Skills
 
 ```bash
 # 添加本地 skills 目录（绝对或相对路径）
-skills source add ~/Projects/my-skills
-skills source add ./local-skills
+skillsync source add ~/Projects/my-skills
+skillsync source add ./local-skills
 
 # 运行 fetch 同步
-skills fetch
+skillsync fetch
 ```
 
 ## 命令列表
 
 | 命令 | 说明 |
 |------|------|
-| `skills fetch` | 获取/更新所有 skills |
-| `skills fetch -- anthropics/skills` | 获取指定源 |
-| `skills sync` | 同步到所有启用的目标 |
-| `skills status` | 查看同步状态 |
-| `skills list` | 列出所有 skills |
-| `skills config` | 显示当前配置 |
-
-**向后兼容:**
-- `npm run skills:fetch` 仍然可用
-- `npm run skills:sync` 仍然可用
-- `npm run skills:status` 仍然可用
+| `skillsync fetch` | 获取/更新所有 skills |
+| `skillsync fetch -- anthropics/skills` | 获取指定源 |
+| `skillsync sync` | 同步到所有启用的目标 |
+| `skillsync status` | 查看同步状态 |
+| `skillsync list` | 列出所有 skills |
+| `skillsync config` | 显示当前配置 |
 
 ## 配置
 
@@ -53,18 +48,18 @@ skills fetch
 **远程源（GitHub）：**
 
 ```bash
-skills source add owner/repo
+skillsync source add owner/repo
 # 或
-skills source add https://github.com/owner/repo
+skillsync source add https://github.com/owner/repo
 ```
 
 **本地源：**
 
 ```bash
 # 添加本地 skills 目录（支持任意路径格式）
-skills source add ~/Projects/apple-mp/skills
-skills source add ./my-local-skills
-skills source add /absolute/path/to/skills
+skillsync source add ~/Projects/apple-mp/skills
+skillsync source add ./my-local-skills
+skillsync source add /absolute/path/to/skills
 ```
 
 路径下的所有子目录都会被视为独立的 skill，并复制到 `~/.skillsync/store/local/`。
@@ -109,7 +104,7 @@ targets: {
 
 - **远程源**: 每次 `fetch` 会**完全覆盖**本地内容
 - **本地源**: 在 `fetch` 时从源路径复制，带冲突检测
-- **更新本地 skills**: 重新运行 `skills fetch` 从源路径同步变更
+- **更新本地 skills**: 重新运行 `skillsync fetch` 从源路径同步变更
 - **本地存储**: 所有本地 skills 以扁平结构存储在 `~/.skillsync/store/local/`
 
 ## 默认配置
