@@ -10,8 +10,8 @@
 # 1. 从 Git 和本地源获取 skills
 skillsync fetch
 
-# 2. 同步到所有启用的目标工具
-skillsync sync
+# 2. 推送到所有启用的目标工具
+skillsync push
 
 # 3. 查看状态
 skillsync status
@@ -34,7 +34,8 @@ skillsync fetch
 |------|------|
 | `skillsync fetch` | 获取/更新所有 skills |
 | `skillsync fetch -- anthropics/skills` | 获取指定源 |
-| `skillsync sync` | 同步到所有启用的目标 |
+| `skillsync push` | 推送到所有启用的目标 |
+| `skillsync sync` | (已弃用) 请使用 'push' |
 | `skillsync status` | 查看同步状态 |
 | `skillsync list` | 列出所有 skills |
 | `skillsync config` | 显示当前配置 |

@@ -5,7 +5,7 @@
  * Sync AI skills to Cursor, Claude, Codex and more
  */
 import { fetch } from "./commands/fetch.js";
-import { sync } from "./commands/sync.js";
+import { push } from "./commands/push.js";
 import { status } from "./commands/status.js";
 import { list } from "./commands/list.js";
 import { sourceCommand } from "./commands/source.js";
@@ -43,7 +43,7 @@ ${bold("Usage:")}
 ${bold("Commands:")}
   init               Initialize config (~/.skillsync/)
   fetch [source]     Fetch skills from Git
-  sync               Sync to all enabled targets
+  push               Push to all enabled targets
   status             View sync status
   ls, list           List all skills
   config             Show configuration
@@ -67,7 +67,7 @@ ${bold("Examples:")}
   skillsync source add anthropics/skills
   skillsync target add cursor
   skillsync fetch
-  skillsync sync
+  skillsync push
   skillsync status
 
 ${bold("Version:")} ${version}
@@ -86,8 +86,12 @@ async function main(): Promise<void> {
       case "fetch":
         await fetch(args[1]);
         break;
+      case "push":
+        await push();
+        break;
       case "sync":
-        await sync();
+        // Deprecated: sync command, but keep for compatibility
+        await push(true);
         break;
       case "status":
         await status();

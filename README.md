@@ -24,8 +24,8 @@ npm install -g skillsync
 # 1. Fetch skills from Git and local sources
 skillsync fetch
 
-# 2. Sync to all enabled targets
-skillsync sync
+# 2. Push to all enabled targets
+skillsync push
 
 # 3. View status
 skillsync status
@@ -48,7 +48,8 @@ skillsync fetch
 |---------|-------------|
 | `skillsync fetch` | Fetch/update all skills from sources |
 | `skillsync fetch <source>` | Fetch specific source |
-| `skillsync sync` | Sync to all enabled targets |
+| `skillsync push` | Push to all enabled targets |
+| `skillsync sync` | (deprecated) Use 'push' instead |
 | `skillsync status` | View sync status |
 | `skillsync list` | List all skills |
 | `skillsync config` | Show configuration |

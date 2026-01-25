@@ -39,6 +39,6 @@ export async function init(): Promise<void> {
 
   console.log(bold("Next steps:"));
   console.log(dim("  skillsync fetch    # Download skills"));
-  console.log(dim("  skillsync sync     # Sync to targets"));
+  console.log(dim("  skillsync push     # Push to targets"));
   console.log(dim("  skillsync status   # Check status\n"));
 }

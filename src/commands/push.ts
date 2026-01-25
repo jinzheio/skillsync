@@ -1,11 +1,11 @@
 /**
- * Sync command - sync skills to all enabled targets
+ * Push command - push skills to all enabled targets
  */
 import { cp, rm, mkdir, readdir, stat } from "node:fs/promises";
 import { join, basename } from "node:path";
 import { readConfig } from "../lib/config.js";
 import { STORE_DIR } from "../lib/paths.js";
-import { green, red, dim, bold } from "../lib/colors.js";
+import { green, red, dim, bold, yellow } from "../lib/colors.js";
 
 async function exists(path: string): Promise<boolean> {
   try {
@@ -16,10 +16,14 @@ async function exists(path: string): Promise<boolean> {
   }
 }
 
-export async function sync(): Promise<void> {
+export async function push(deprecated = false): Promise<void> {
   const config = await readConfig();
 
-  console.log(bold("\nSyncing skills to targets...\n"));
+  if (deprecated) {
+    console.log(yellow("\n⚠️  Warning: 'sync' command is deprecated. Use 'push' instead.\n"));
+  }
+
+  console.log(bold("\nPushing skills to targets...\n"));
 
   // Get all skills from enabled sources
   const allSkills: string[] = [];
@@ -86,7 +90,7 @@ export async function sync(): Promise<void> {
         await cp(skillPath, join(target.path, skillName), { recursive: true });
       }
 
-      console.log(`  ${green("✓")} ${name.padEnd(15)} ${green("synced")}`);
+      console.log(`  ${green("✓")} ${name.padEnd(15)} ${green("pushed")}`);
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
       console.log(`  ${red("✗")} ${name.padEnd(15)} ${red(msg)}`);
