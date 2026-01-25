@@ -3,6 +3,7 @@
  */
 import { readConfig, addSource, removeSource, setSourceEnabled } from "../lib/config.js";
 import { detectSourceType, parseGitUrl, getLocalSourceName } from "../lib/git.js";
+import { collapsePath } from "../lib/paths.js";
 import { green, red, dim, bold } from "../lib/colors.js";
 
 export async function sourceCommand(args: string[]): Promise<void> {
@@ -164,7 +165,8 @@ async function sourceList(): Promise<void> {
       console.log(`    ${dim(`Subdir: ${source.subdir}`)}`);
     }
     if (source.localPath) {
-      console.log(`    ${dim(`Local: ${source.localPath}`)}`);
+      const displayPath = collapsePath(source.localPath);
+      console.log(`    ${dim(`Local: ${displayPath}`)}`);
     }
   }
 

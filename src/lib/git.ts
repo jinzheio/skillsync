@@ -2,6 +2,7 @@
  * Git URL parsing utilities
  */
 import { expandPath } from "./paths.js";
+import { resolve } from "node:path";
 
 export interface ParsedGitUrl {
   name: string;      // owner/repo
@@ -91,8 +92,17 @@ export function parseGitUrl(input: string): ParsedGitUrl {
 }
 
 /**
- * Get name for local source (full expanded path)
+ * Get name for local source (absolute path)
+ * Expands ~ and converts relative paths to absolute
  */
 export function getLocalSourceName(input: string): string {
-  return expandPath(input);
+  const expanded = expandPath(input);
+
+  // If already absolute, return as is
+  if (expanded.startsWith('/')) {
+    return expanded;
+  }
+
+  // Convert relative path to absolute path
+  return resolve(process.cwd(), expanded);
 }
