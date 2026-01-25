@@ -1,6 +1,6 @@
 {
   "name": "skillsync",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Sync Agent Skills to Cursor, Claude, Codex and more",
   "type": "module",
   "bin": {

@@ -38,7 +38,7 @@ export async function init(): Promise<void> {
   console.log(dim("  • cursor, claude, copilot, codex\n"));
 
   console.log(bold("Next steps:"));
-  console.log(dim("  skills fetch    # Download skills"));
-  console.log(dim("  skills sync     # Sync to targets"));
-  console.log(dim("  skills status   # Check status\n"));
+  console.log(dim("  skillsync fetch    # Download skills"));
+  console.log(dim("  skillsync sync     # Sync to targets"));
+  console.log(dim("  skillsync status   # Check status\n"));
 }

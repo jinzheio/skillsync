@@ -57,7 +57,7 @@ export async function sync(): Promise<void> {
   }
 
   if (allSkills.length === 0) {
-    console.log(dim("  No skills found. Run 'skills fetch' first.\n"));
+    console.log(dim("  No skills found. Run 'skillsync fetch' first.\n"));
     return;
   }
 

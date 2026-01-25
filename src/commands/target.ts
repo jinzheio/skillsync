@@ -41,8 +41,8 @@ async function targetAdd(args: string[]): Promise<void> {
       console.log(dim(`  ${k.padEnd(15)} ${collapsePath(v)}`));
     }
     console.log(dim("\nUsage:"));
-    console.log(dim("  skills target add cursor           # Add known target"));
-    console.log(dim("  skills target add myapp ~/path     # Add custom target"));
+    console.log(dim("  skillsync target add cursor           # Add known target"));
+    console.log(dim("  skillsync target add myapp ~/path     # Add custom target"));
     process.exit(1);
   }
 

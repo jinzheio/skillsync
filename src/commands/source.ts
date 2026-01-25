@@ -36,9 +36,9 @@ async function sourceAdd(args: string[]): Promise<void> {
   if (!input) {
     console.log(red("Error: Source required"));
     console.log(dim("\nUsage:"));
-    console.log(dim("  skills source add <url>           # GitHub URL"));
-    console.log(dim("  skills source add owner/repo      # GitHub shorthand"));
-    console.log(dim("  skills source add ~/path          # Local path"));
+    console.log(dim("  skillsync source add <url>           # GitHub URL"));
+    console.log(dim("  skillsync source add owner/repo      # GitHub shorthand"));
+    console.log(dim("  skillsync source add ~/path          # Local path"));
     console.log(dim("\nOptions:"));
     console.log(dim("  --subdir <path>   Subdirectory within repository"));
     process.exit(1);
@@ -72,7 +72,7 @@ async function sourceAdd(args: string[]): Promise<void> {
       console.log(green(`\n✓ Added source: ${parsed.name}`));
       if (parsed.url) console.log(dim(`  URL: ${parsed.url}`));
       if (subdir) console.log(dim(`  Subdir: ${subdir}`));
-      console.log(dim("\nRun 'skills fetch' to download skills.\n"));
+      console.log(dim("\nRun 'skillsync fetch' to download skills.\n"));
     } else {
       // Local source: validate path exists and store with localPath
       const fullPath = getLocalSourceName(input);
@@ -101,7 +101,7 @@ async function sourceAdd(args: string[]): Promise<void> {
       // Add with localPath property
       await addSource(fullPath, undefined, undefined, fullPath);
       console.log(green(`\n✓ Added local source: ${fullPath}`));
-      console.log(dim(`  Run 'skills fetch' to sync skills.\n`));
+      console.log(dim(`  Run 'skillsync fetch' to sync skills.\n`));
     }
   } catch (error) {
     console.log(red(`\n✗ ${error instanceof Error ? error.message : error}\n`));
@@ -148,7 +148,7 @@ async function sourceList(): Promise<void> {
   const entries = Object.entries(config.sources);
   if (entries.length === 0) {
     console.log(dim("  No sources configured.\n"));
-    console.log(dim("  Add a source: skills source add anthropics/skills\n"));
+    console.log(dim("  Add a source: skillsync source add anthropics/skills\n"));
     return;
   }
 

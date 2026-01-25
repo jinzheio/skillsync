@@ -38,7 +38,7 @@ async function printHelp(): Promise<void> {
 ${bold("skillsync")} - Sync Agent Skills to various tools
 
 ${bold("Usage:")}
-  skills <command> [options]
+  skillsync <command> [options]
 
 ${bold("Commands:")}
   init               Initialize config (~/.skillsync/)
@@ -63,12 +63,12 @@ ${bold("Commands:")}
     list             List targets
 
 ${bold("Examples:")}
-  skills init
-  skills source add anthropics/skills
-  skills target add cursor
-  skills fetch
-  skills sync
-  skills status
+  skillsync init
+  skillsync source add anthropics/skills
+  skillsync target add cursor
+  skillsync fetch
+  skillsync sync
+  skillsync status
 
 ${bold("Version:")} ${version}
 `);
