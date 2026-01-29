@@ -4,7 +4,7 @@
   "description": "Sync Agent Skills to Cursor, Claude, Codex and more",
   "type": "module",
   "bin": {
-    "skillsync": "./dist/cli.js"
+    "skillsync": "dist/cli.js"
   },
   "files": [
     "dist",
@@ -33,7 +33,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jinzheio/skillsync.git"
+    "url": "git+https://github.com/jinzheio/skillsync.git"
   },
   "homepage": "https://github.com/jinzheio/skillsync#readme",
   "bugs": {
