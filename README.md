@@ -4,8 +4,6 @@
 
 Sync **Agent Skills** to **OpenClaw**, **Cursor**, **Claude**, **Codex**, and more.
 
-> 💡 **Tip**: To avoid information risks, it is recommended to [install on a standalone server instead of a personal computer](https://clawsimple.com).
-
 ## Features
 
 - 🔄 Sync skills to multiple AI coding tools (Cursor, Claude, Codex, Copilot, etc.)

@@ -4,7 +4,6 @@
 
 同步 Agent Skills 到 OpenClaw、Antigravity、Codex、Claude Code、Cursor 等工具。
 
-> 💡 **提示**：为了避免引入信息风险，建议 [使用独立服务器而不是个人电脑来安装](https://clawsimple.com)。
 
 ## 快速开始
 
