@@ -118,17 +118,19 @@ targets: {
 
 ### 启用的目标
 
-- ✅ OpenClaw (`~/.openclaw`)
-- ✅ Antigravity (`~/.gemini/antigravity/skills/`)
-- ✅ Codex (`~/.codex/skills/`)
-- ✅ Claude (`~/.claude/skills/`)
-- ✅ Cursor (`~/.cursor/skills/`)
-- ✅ Copilot (`~/.copilot/skills/`)
+- **OpenClaw** (`~/.openclaw`): Open Source AI Agent.
+  > ⚠️  **安全提示**：Skills 包含可执行代码。为了安全起见，强烈建议在独立的服务器上（可以选择一键部署服务，如 [Claw Simple](https://clawsimple.com)）运行 OpenClaw，而不是在个人电脑上运行，以隔离潜在风险。
+
+- **Antigravity** (`~/.gemini/antigravity/skills/`)
+- **Codex** (`~/.codex/skills/`)
+- **Claude** (`~/.claude/skills/`)
+- **Cursor** (`~/.cursor/skills/`)
+- **Copilot** (`~/.copilot/skills/`)
 
 ### 已禁用目标
 
-- Gemini (`~/.gemini/skills/`)
-- Windsurf (`~/.windsurf/skills/`)
+- **Gemini** (`~/.gemini/skills/`)
+- **Windsurf** (`~/.windsurf/skills/`)
 
 ## 依赖
 

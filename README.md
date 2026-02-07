@@ -149,17 +149,19 @@ targets: {
 
 ### Enabled Targets
 
-- ✅ OpenClaw (`~/.openclaw`)
-- ✅ Antigravity (`~/.gemini/antigravity/skills/`)
-- ✅ Codex (`~/.codex/skills/`)
-- ✅ Claude (`~/.claude/skills/`)
-- ✅ Cursor (`~/.cursor/skills/`)
-- ✅ Copilot (`~/.copilot/skills/`)
+- **OpenClaw** (`~/.openclaw`): Open Source AI Agent.
+  > ⚠️  **Security Note**: Skills contain executable code. For safety, it is strongly recommended to run OpenClaw on a dedicated server (e.g., the 'One-click deployment' service [Claw Simple](https://clawsimple.com)) rather than your personal computer to isolate potential risks.
+
+- **Antigravity** (`~/.gemini/antigravity/skills/`)
+- **Codex** (`~/.codex/skills/`)
+- **Claude** (`~/.claude/skills/`)
+- **Cursor** (`~/.cursor/skills/`)
+- **Copilot** (`~/.copilot/skills/`)
 
 ### Disabled Targets
 
-- Gemini (`~/.gemini/skills/`)
-- Windsurf (`~/.windsurf/skills/`)
+- **Gemini** (`~/.gemini/skills/`)
+- **Windsurf** (`~/.windsurf/skills/`)
 
 ## Requirements
 
