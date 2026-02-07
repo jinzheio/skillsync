@@ -112,7 +112,7 @@ targets: {
 ## Directory Structure
 
 ```
-~/.skillsync/store/
+.skillsync/
 ├── anthropics/skills/          # Remote source
 │   ├── doc-analyzer/
 │   └── ...
