@@ -1,8 +1,10 @@
-# Skills Sync
+# Skillsync
 
 > [English](./README.md)
 
-同步 Agent Skills 到 Antigravity、Codex、Claude Code、Cursor 等工具。
+同步 Agent Skills 到 OpenClaw、Antigravity、Codex、Claude Code、Cursor 等工具。
+
+> 💡 **提示**：为了避免引入信息风险，建议 [使用独立服务器而不是个人电脑来安装](https://clawsimple.com)。
 
 ## 快速开始
 
@@ -44,7 +46,7 @@ skillsync fetch
 
 ## 配置
 
-配置文件位置：`~/.skillsync/config.json`。你可以通过命令行管理，或手动编辑。
+配置文件位置：当前目录下的 `.skillsync/config.json`。你可以通过命令行管理，或手动编辑。
 
 ### 添加新的 Skills 源
 
@@ -65,7 +67,7 @@ skillsync source add ./my-local-skills
 skillsync source add /absolute/path/to/skills
 ```
 
-路径下的所有子目录都会被视为独立的 skill，并复制到 `~/.skillsync/store/local/`。
+路径下的所有子目录都会被视为独立的 skill，并复制到 `.skillsync/local/`。
 
 **冲突解决**：当获取本地源时，如果同名 skill 已存在且内容不同，系统会提示您选择：
 - `yes` - 覆盖这个特定的 skill
@@ -93,7 +95,7 @@ targets: {
 ## 目录结构
 
 ```
-~/.skillsync/store/
+.skillsync/
 ├── anthropics/skills/          # 远程源
 │   ├── doc-analyzer/
 │   └── ...
@@ -110,12 +112,13 @@ targets: {
 - **远程源**: 每次 `fetch` 会**完全覆盖**本地内容
 - **本地源**: 在 `fetch` 时从源路径复制，带冲突检测
 - **更新本地 skills**: 重新运行 `skillsync fetch` 从源路径同步变更
-- **本地存储**: 所有本地 skills 以扁平结构存储在 `~/.skillsync/store/local/`
+- **本地存储**: 所有本地 skills 以扁平结构存储在 `.skillsync/local/`
 
 ## 默认配置
 
 ### 启用的目标
 
+- ✅ OpenClaw (`~/.openclaw`)
 - ✅ Antigravity (`~/.gemini/antigravity/skills/`)
 - ✅ Codex (`~/.codex/skills/`)
 - ✅ Claude (`~/.claude/skills/`)

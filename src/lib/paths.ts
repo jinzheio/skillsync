@@ -5,9 +5,9 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 
 export const HOME = homedir();
-export const CONFIG_DIR = join(HOME, ".skillsync");
+export const CONFIG_DIR = join(process.cwd(), ".skillsync");
 export const CONFIG_FILE = join(CONFIG_DIR, "config.json");
-export const STORE_DIR = join(CONFIG_DIR, "store");
+export const STORE_DIR = CONFIG_DIR;
 
 // Known target paths
 export const KNOWN_TARGETS: Record<string, string> = {
@@ -18,6 +18,7 @@ export const KNOWN_TARGETS: Record<string, string> = {
   gemini: join(HOME, ".gemini", "skills"),
   copilot: join(HOME, ".copilot", "skills"),
   windsurf: join(HOME, ".windsurf", "skills"),
+  openclaw: join(HOME, ".openclaw"),
 };
 
 // Expand ~ in paths

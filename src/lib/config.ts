@@ -18,7 +18,7 @@ async function exists(path: string): Promise<boolean> {
 // Ensure config directory exists
 export async function ensureConfigDir(): Promise<void> {
   await mkdir(CONFIG_DIR, { recursive: true });
-  await mkdir(STORE_DIR, { recursive: true });
+
 }
 
 // Read config
@@ -35,6 +35,7 @@ export async function readConfig(): Promise<Config> {
         codex: { path: KNOWN_TARGETS.codex, enabled: true },
         antigravity: { path: KNOWN_TARGETS.antigravity, enabled: true },
         copilot: { path: KNOWN_TARGETS.copilot, enabled: true },
+        openclaw: { path: KNOWN_TARGETS.openclaw, enabled: true },
       },
     };
     await writeConfig(config);

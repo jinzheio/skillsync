@@ -1,8 +1,10 @@
-# Skills Sync
+# Skillsync
 
 > [中文文档](./README.zh-CN.md)
 
-Sync **Agent Skills** to **Cursor**, **Claude**, **Codex**, and more.
+Sync **Agent Skills** to **OpenClaw**, **Cursor**, **Claude**, **Codex**, and more.
+
+> 💡 **Tip**: To avoid information risks, it is recommended to [install on a standalone server instead of a personal computer](https://clawsimple.com).
 
 ## Features
 
@@ -61,7 +63,7 @@ skillsync fetch
 
 ## Configuration
 
-Configuration is stored in `~/.skillsync/config.json`. You can manage it via CLI commands or edit it manually.
+Configuration is stored in `.skillsync/config.json` in the current directory. You can manage it via CLI commands or edit it manually.
 
 ### Add New Skills Source
 
@@ -82,7 +84,7 @@ skillsync source add ./my-local-skills
 skillsync source add /absolute/path/to/skills
 ```
 
-Any subdirectories in the path will be treated as individual skills and copied to `~/.skillsync/store/local/`.
+Any subdirectories in the path will be treated as individual skills and copied to `.skillsync/local/`.
 
 **Conflict Resolution**: When fetching local sources, if a skill with the same name already exists in the local store with different content, you'll be prompted to choose:
 - `yes` - Overwrite this specific skill
@@ -128,7 +130,7 @@ targets: {
    - Remote sources: Cloned/updated from Git repositories
    - Local sources: Copied from your local directories with conflict detection
 
-2. **Store**: All skills are stored in `~/.skillsync/store/`
+2. **Store**: All skills are stored in `.skillsync/`
    - Remote sources maintain their repository structure
    - Local sources are stored in a flat structure under `local/`
 
@@ -141,12 +143,13 @@ targets: {
 - **Remote sources**: Each `fetch` will **completely overwrite** local content
 - **Local sources**: Copied from source path with intelligent conflict detection
 - **Updating local skills**: Re-run `skillsync fetch` to sync changes from source path
-- **Local storage**: All local skills are stored in flat structure under `~/.skillsync/store/local/`
+- **Local storage**: All local skills are stored in flat structure under `.skillsync/local/`
 
 ## Default Configuration
 
 ### Enabled Targets
 
+- ✅ OpenClaw (`~/.openclaw`)
 - ✅ Antigravity (`~/.gemini/antigravity/skills/`)
 - ✅ Codex (`~/.codex/skills/`)
 - ✅ Claude (`~/.claude/skills/`)
